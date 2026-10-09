@@ -69,13 +69,13 @@ export function TreatmentIndex({ items }: { items: Treatment[] }) {
         </div>
       </div>
 
-      <ol className="border-t border-grafite/15">
+      <ol className="border-t border-tinta/15">
         {items.map((t, i) => {
           const isOpen = open === i;
           const btnId = `${uid}-t-${t.id}`;
           const panelId = `${uid}-p-${t.id}`;
           return (
-            <li key={t.id} className="border-b border-grafite/15" data-reveal="up" onPointerEnter={() => setHovered(i)}>
+            <li key={t.id} className="border-b border-tinta/15" data-reveal="up" onPointerEnter={() => setHovered(i)}>
               <h3>
                 <button
                   id={btnId}
@@ -85,20 +85,20 @@ export function TreatmentIndex({ items }: { items: Treatment[] }) {
                   onClick={() => setOpen(isOpen ? null : i)}
                   className="group grid w-full grid-cols-[2.5rem_1fr_auto] items-baseline gap-x-4 py-5 text-left sm:grid-cols-[4rem_1fr_auto] sm:py-7 md:grid-cols-[4rem_minmax(0,1.1fr)_minmax(0,1fr)_auto]"
                 >
-                  <span className="eyebrow text-tinta" aria-hidden="true">
+                  <span className="eyebrow text-ardosia" aria-hidden="true">
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   <span className="font-serif text-[1.9rem] leading-[1.05] tracking-[-0.015em] transition-transform duration-500 ease-out-strong group-hover:translate-x-2 sm:text-[2.5rem] lg:text-[3rem]">
                     {t.name}
                   </span>
-                  <span className="hidden text-[0.98rem] text-tinta md:block">{t.summary}</span>
+                  <span className="hidden text-[0.98rem] text-ardosia md:block">{t.summary}</span>
                   <span
                     aria-hidden="true"
-                    className={`grid size-9 place-items-center self-center rounded-full border transition-[transform,background-color,border-color,color] duration-300 ease-out-strong ${
-                      isOpen ? "rotate-45 border-musgo bg-musgo text-linho" : "border-grafite/20 group-hover:border-grafite/50"
+                    className={`grid size-9 place-items-center self-center rounded-full border transition-[background-color,border-color,color] duration-300 ease-out-strong ${
+                      isOpen ? "border-petroleo bg-petroleo text-porcelana" : "border-tinta/20 group-hover:border-tinta/50"
                     }`}
                   >
-                    <Icon name="plus" size={16} />
+                    <span className="pm-icon" />
                   </span>
                 </button>
               </h3>
@@ -117,14 +117,14 @@ export function TreatmentIndex({ items }: { items: Treatment[] }) {
                       />
                     </div>
                     <div className="sm:col-start-2 md:row-start-1">
-                      <p className="text-tinta md:hidden">{t.summary}</p>
+                      <p className="text-ardosia md:hidden">{t.summary}</p>
                       <p className="mt-3 max-w-xl md:mt-0">{t.detail}</p>
-                      <p className="eyebrow mt-6 text-tinta">{t.timeline}</p>
+                      <p className="eyebrow mt-6 text-ardosia">{t.timeline}</p>
                       <a
                         href={whatsappLink(`Olá! Gostaria de agendar uma avaliação para ${t.name.toLowerCase()}.`)}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="link-line mt-6 inline-flex items-center gap-2 text-[0.95rem] font-medium text-musgo"
+                        className="link-line mt-6 inline-flex items-center gap-2 text-[0.95rem] font-medium text-petroleo"
                       >
                         Agendar avaliação para {t.name.toLowerCase()}
                         <Icon name="arrowUpRight" size={16} />

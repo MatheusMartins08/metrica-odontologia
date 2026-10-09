@@ -21,8 +21,8 @@ import { FinalCta } from "@/components/sections/FinalCta";
 export default function Home() {
   return (
     <>
-      <Header />
       <MotionRoot>
+        <Header />
         <main id="conteudo">
           <Hero />
           <Manifesto />
@@ -41,8 +41,8 @@ export default function Home() {
           <Contact />
           <FinalCta />
         </main>
+        <Footer onHome />
       </MotionRoot>
-      <Footer onHome />
     </>
   );
 }

@@ -6,18 +6,18 @@ export function Footer({ onHome = false }: { onHome?: boolean }) {
   const { address } = site;
 
   return (
-    <footer className="on-dark bg-noite text-linho">
+    <footer className="on-dark bg-abismo text-porcelana">
       <div className="container-page pt-20 sm:pt-28">
-        <div className="grid gap-14 border-b border-linho/10 pb-16 md:grid-cols-12 md:gap-8">
+        <div className="grid gap-14 border-b border-porcelana/10 pb-16 md:grid-cols-12 md:gap-8">
           <div className="md:col-span-4">
-            <Logo variant="symbol" title="" className="h-14 w-14 text-linho" />
-            <p className="mt-8 max-w-xs text-[0.95rem] leading-relaxed text-salvia">
+            <Logo variant="symbol" title="" className="h-14 w-14 text-porcelana" />
+            <p className="mt-8 max-w-xs text-[0.95rem] leading-relaxed text-bruma">
               Odontologia estética e funcional, planejada com precisão e feita sem pressa. Jardins, São Paulo.
             </p>
           </div>
 
           <nav aria-label="Rodapé" className="md:col-span-2">
-            <h2 className="eyebrow mb-5 text-salvia">Navegação</h2>
+            <h2 className="eyebrow mb-5 text-bruma">Navegação</h2>
             <ul className="space-y-2.5 text-[0.95rem]">
               {nav.map((item) => (
                 <li key={item.id}>
@@ -30,7 +30,7 @@ export function Footer({ onHome = false }: { onHome?: boolean }) {
           </nav>
 
           <div className="md:col-span-3">
-            <h2 className="eyebrow mb-5 text-salvia">Contato</h2>
+            <h2 className="eyebrow mb-5 text-bruma">Contato</h2>
             <ul className="space-y-2.5 text-[0.95rem]">
               <li>
                 <a href={site.phone.href} className="link-line">
@@ -56,7 +56,7 @@ export function Footer({ onHome = false }: { onHome?: boolean }) {
           </div>
 
           <div className="md:col-span-3">
-            <h2 className="eyebrow mb-5 text-salvia">Endereço</h2>
+            <h2 className="eyebrow mb-5 text-bruma">Endereço</h2>
             <address className="text-[0.95rem] not-italic leading-relaxed">
               {address.street}
               <br />
@@ -64,19 +64,19 @@ export function Footer({ onHome = false }: { onHome?: boolean }) {
               <br />
               CEP {address.postalCode}
             </address>
-            <ul className="mt-6 space-y-1 text-[0.95rem] text-salvia">
+            <ul className="mt-6 space-y-1 text-[0.95rem] text-bruma">
               {site.hours.map((h) => (
                 <li key={h.days}>
-                  {h.days}: <span className="text-linho">{h.time}</span>
+                  {h.days}: <span className="text-porcelana">{h.time}</span>
                 </li>
               ))}
             </ul>
           </div>
         </div>
 
-        <Logo variant="full" className="mt-16 h-auto w-full text-linho/90" />
+        <Logo variant="full" className="mt-16 h-auto w-full text-porcelana/90" />
 
-        <div className="flex flex-col gap-3 py-10 text-[0.8rem] text-salvia sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-col gap-3 py-10 text-[0.8rem] text-bruma sm:flex-row sm:items-center sm:justify-between">
           <p>
             © {site.copyrightYear} {site.legalName}. Responsável técnica: {site.technicalLead}.
           </p>

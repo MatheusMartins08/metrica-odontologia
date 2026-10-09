@@ -32,34 +32,34 @@ export function Process() {
         <ol className="relative mt-20 grid gap-12 md:grid-cols-2 lg:mt-28 lg:grid-cols-4 lg:gap-10">
           <span
             aria-hidden="true"
-            className="rule-ticks absolute inset-x-0 top-0 hidden h-1.5 text-grafite/35 lg:block"
+            className="rule-ticks absolute inset-x-0 top-0 hidden h-1.5 text-tinta/35 lg:block"
             data-reveal="rule"
           />
           {process.steps.map((step, i) => (
-            <li key={step.title} className="relative border-t border-grafite/20 pt-8 lg:border-t-0 lg:pt-12" data-reveal="up">
-              <span aria-hidden="true" className="absolute -top-[5px] left-0 hidden size-[11px] rounded-full bg-musgo lg:block" />
-              <p className="eyebrow text-tinta">Etapa {String(i + 1).padStart(2, "0")}</p>
+            <li key={step.title} className="relative border-t border-tinta/20 pt-8 lg:border-t-0 lg:pt-12" data-reveal="up">
+              <span aria-hidden="true" className="absolute -top-[5px] left-0 hidden size-[11px] rounded-full bg-petroleo lg:block" />
+              <p className="eyebrow text-ardosia">Etapa {String(i + 1).padStart(2, "0")}</p>
               <h3 className="mt-4 font-serif text-[1.85rem] leading-tight">{step.title}</h3>
-              <p className="mt-3 max-w-xs text-tinta">{step.text}</p>
+              <p className="mt-3 max-w-xs text-ardosia">{step.text}</p>
             </li>
           ))}
         </ol>
 
         {/* Facilidades */}
-        <section aria-labelledby="pagamento-title" className="mt-28 grid gap-10 border-t border-grafite/20 pt-12 lg:mt-36 lg:grid-cols-12 lg:gap-10">
+        <section aria-labelledby="pagamento-title" className="mt-28 grid gap-10 border-t border-tinta/20 pt-12 lg:mt-36 lg:grid-cols-12 lg:gap-10">
           <div className="lg:col-span-4">
             <h2 id="pagamento-title" className="display-3" data-reveal="up">
               Facilidades de pagamento
             </h2>
-            <p className="mt-4 max-w-sm text-tinta" data-reveal="up">
+            <p className="mt-4 max-w-sm text-ardosia" data-reveal="up">
               O plano de tratamento chega com valores fechados por etapa. Você escolhe como prefere pagar.
             </p>
           </div>
           <dl className="grid gap-x-10 sm:grid-cols-2 lg:col-span-7 lg:col-start-6">
             {payment.map((p) => (
-              <div key={p.title} className="border-b border-grafite/15 py-5" data-reveal="up">
+              <div key={p.title} className="border-b border-tinta/15 py-5" data-reveal="up">
                 <dt className="font-medium">{p.title}</dt>
-                <dd className="mt-1 text-[0.98rem] text-tinta">{p.text}</dd>
+                <dd className="mt-1 text-[0.98rem] text-ardosia">{p.text}</dd>
               </div>
             ))}
           </dl>

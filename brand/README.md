@@ -36,5 +36,5 @@ A marca fala de proporção, simetria e precisão sem recorrer a dente, sorriso 
 
 - **Área de proteção**: no mínimo a altura do “É” sem acento, em todos os lados.
 - **Tamanho mínimo**: 96 px de largura para o logotipo com assinatura; 72 px sem assinatura; 16 px para o símbolo (use o favicon).
-- **Cores**: grafite `#2A2926` ou linho `#F3F0E9`. O símbolo colorido usa musgo `#1E2B25` com eixo em oliva `#6E7150`.
+- **Cores**: tinta `#14262C` sobre fundos claros ou porcelana `#F6F5F1` sobre fundos escuros. O símbolo colorido usa petróleo `#0F3D47` com eixo em teal `#2C7472`; no favicon e nas versões invertidas, o eixo é menta `#BEDDD4`.
 - Não distorcer, não aplicar sombra nem gradiente, não recompor a assinatura com outra fonte.

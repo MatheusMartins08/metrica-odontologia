@@ -27,7 +27,7 @@ export function NeedsSelector({ items }: { items: Need[] }) {
       <div
         role="tablist"
         aria-label="Escolha a sua situação"
-        className="scrollbar-none -mx-5 flex gap-2 overflow-x-auto px-5 lg:col-span-5 lg:mx-0 lg:flex-col lg:gap-0 lg:overflow-visible lg:border-t lg:border-linho/15 lg:px-0"
+        className="scrollbar-none -mx-5 flex gap-2 overflow-x-auto px-5 lg:col-span-5 lg:mx-0 lg:flex-col lg:gap-0 lg:overflow-visible lg:border-t lg:border-porcelana/15 lg:px-0"
       >
         {items.map((item, i) => {
           const selected = i === index;
@@ -45,10 +45,10 @@ export function NeedsSelector({ items }: { items: Need[] }) {
               tabIndex={selected ? 0 : -1}
               onClick={() => setIndex(i)}
               onKeyDown={onKey}
-              className={`group shrink-0 rounded-full border px-4 py-2.5 text-[0.95rem] transition-colors duration-200 lg:flex lg:w-full lg:items-center lg:justify-between lg:rounded-none lg:border-0 lg:border-b lg:border-linho/15 lg:px-0 lg:py-5 lg:text-left lg:font-serif lg:text-[1.9rem] lg:leading-tight ${
+              className={`group shrink-0 rounded-full border px-4 py-2.5 text-[0.95rem] transition-colors duration-200 lg:flex lg:w-full lg:items-center lg:justify-between lg:rounded-none lg:border-0 lg:border-b lg:border-porcelana/15 lg:px-0 lg:py-5 lg:text-left lg:font-serif lg:text-[1.9rem] lg:leading-tight ${
                 selected
-                  ? "border-linho bg-linho text-musgo lg:bg-transparent lg:text-linho"
-                  : "border-linho/25 text-salvia hover:border-linho/60 hover:text-linho"
+                  ? "border-porcelana bg-porcelana text-petroleo lg:bg-transparent lg:text-porcelana"
+                  : "border-porcelana/25 text-bruma hover:border-porcelana/60 hover:text-porcelana"
               }`}
             >
               <span>{item.label}</span>
@@ -71,23 +71,23 @@ export function NeedsSelector({ items }: { items: Need[] }) {
         className="min-w-0 lg:col-span-6 lg:col-start-7"
       >
         <div key={current.id} className="animate-fade-in">
-          <h3 className="display-2 text-linho">{current.title}</h3>
-          <p className="lead mt-6 max-w-xl text-salvia">{current.text}</p>
+          <h3 className="display-2 text-porcelana">{current.title}</h3>
+          <p className="lead mt-6 max-w-xl text-bruma">{current.text}</p>
 
-          <div className="mt-10 grid gap-8 border-t border-linho/15 pt-8 sm:grid-cols-2">
+          <div className="mt-10 grid gap-8 border-t border-porcelana/15 pt-8 sm:grid-cols-2">
             <div>
-              <p className="eyebrow text-salvia">Caminhos indicados</p>
+              <p className="eyebrow text-bruma">Caminhos indicados</p>
               <ul className="mt-4 space-y-2">
                 {current.paths.map((p) => (
                   <li key={p} className="flex items-baseline gap-3">
-                    <span aria-hidden="true" className="h-px w-4 shrink-0 translate-y-[-0.3em] bg-areia" />
+                    <span aria-hidden="true" className="h-px w-4 shrink-0 translate-y-[-0.3em] bg-menta" />
                     {p}
                   </li>
                 ))}
               </ul>
             </div>
             <div>
-              <p className="eyebrow text-salvia">Primeiro passo</p>
+              <p className="eyebrow text-bruma">Primeiro passo</p>
               <p className="mt-4">{current.firstStep}</p>
             </div>
           </div>
@@ -96,7 +96,7 @@ export function NeedsSelector({ items }: { items: Need[] }) {
             href={whatsappLink(current.message)}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn mt-10 bg-linho text-musgo hover:bg-creme"
+            className="btn mt-10 bg-porcelana text-petroleo hover:bg-agua"
           >
             Falar com a recepção
             <Icon name="arrowUpRight" size={18} className="btn-arrow" />

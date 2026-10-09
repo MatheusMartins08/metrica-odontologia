@@ -26,7 +26,7 @@ export function Space() {
               lines={["Um lugar pensado", <>para a <em className="italic">calma.</em></>]}
             />
           </div>
-          <p className="max-w-md text-tinta lg:col-span-4 lg:col-start-9 lg:pb-2" data-reveal="up">
+          <p className="max-w-md text-ardosia lg:col-span-4 lg:col-start-9 lg:pb-2" data-reveal="up">
             {space.intro}
           </p>
         </div>
@@ -36,14 +36,14 @@ export function Space() {
             <li key={img.caption} className={layout[i].cell}>
               <figure>
                 <div
-                  className={`relative overflow-hidden bg-creme ${layout[i].frame}`}
+                  className={`relative overflow-hidden bg-agua ${layout[i].frame}`}
                   data-reveal="image"
                 >
                   <div className="absolute inset-x-0 top-[-6%] h-[112%]" data-parallax="0.08">
                     <Image src={img.src} alt={img.alt} fill placeholder="blur" sizes={layout[i].sizes} className="object-cover" />
                   </div>
                 </div>
-                <figcaption className="eyebrow mt-3 flex flex-wrap gap-x-3 gap-y-1 text-tinta">
+                <figcaption className="eyebrow mt-3 flex flex-wrap gap-x-3 gap-y-1 text-ardosia">
                   <span aria-hidden="true">Fig. {String(i + 2).padStart(2, "0")}</span>
                   <span>{img.caption}</span>
                 </figcaption>

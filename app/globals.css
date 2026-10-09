@@ -5,17 +5,22 @@
 /* ------------------------------------------------------------------ */
 
 @theme {
-  --color-linho: #f3f0e9;
-  --color-creme: #e9e3d6;
-  --color-areia: #d6ccba;
-  --color-pedra: #8b867c;
-  --color-tinta: #66625a; /* muted text on light surfaces (AA) */
-  --color-grafite: #2a2926;
-  --color-noite: #151614;
-  --color-musgo: #1e2b25;
-  --color-musgo-claro: #2b3b33;
-  --color-salvia: #aeb4a8; /* muted text on dark surfaces (AA) */
-  --color-oliva: #6e7150;
+  /* Light surfaces */
+  --color-porcelana: #f6f5f1; /* base off-white */
+  --color-agua: #e3eeec; /* fresh mint-aqua tint */
+  --color-areia: #eee8de; /* warm tint that balances the cool palette */
+  --color-nevoa: #cbd8d9; /* decorative hairlines on light surfaces */
+
+  /* Institutional */
+  --color-petroleo: #0f3d47; /* buttons, dark sections */
+  --color-abismo: #0a2a31; /* deepest surface: footer, technology */
+  --color-teal: #2c7472; /* accent on light: stars, focus, measurement lines (5:1 on porcelana) */
+  --color-menta: #beddd4; /* accent on dark: emphasis, ticks, symbol axis */
+
+  /* Text */
+  --color-tinta: #14262c; /* blue-black body text */
+  --color-ardosia: #4f6168; /* muted text on light surfaces (AA on every light tint) */
+  --color-bruma: #a8c2c3; /* muted text on dark surfaces (AA) */
 
   --font-serif: var(--font-instrument-serif), "Times New Roman", serif;
   --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
@@ -57,8 +62,8 @@
   }
 
   body {
-    background: var(--color-linho);
-    color: var(--color-grafite);
+    background: var(--color-porcelana);
+    color: var(--color-tinta);
     font-family: var(--font-sans);
     font-size: 1.0625rem;
     line-height: 1.6;
@@ -68,8 +73,8 @@
   }
 
   ::selection {
-    background: var(--color-musgo);
-    color: var(--color-linho);
+    background: var(--color-petroleo);
+    color: var(--color-porcelana);
   }
 
   [id] {
@@ -77,12 +82,21 @@
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-oliva);
+    outline: 2px solid var(--color-teal);
     outline-offset: 3px;
   }
 
   .on-dark :focus-visible {
-    outline-color: var(--color-areia);
+    outline-color: var(--color-menta);
+  }
+
+  /* Italic accents in headlines: teal on light surfaces, mint on dark ones */
+  :where(h1, h2, h3) em {
+    color: var(--color-teal);
+  }
+
+  :where(.on-dark) :where(h1, h2, h3) em {
+    color: var(--color-menta);
   }
 }
 
@@ -170,21 +184,6 @@
 }
 
 /* ------------------------------------------------------------------ */
-/* Film grain (fixed, pointer-events none, never on scrolling layers)  */
-/* ------------------------------------------------------------------ */
-
-.grain::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: 60;
-  pointer-events: none;
-  opacity: 0.05;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  mix-blend-mode: multiply;
-}
-
-/* ------------------------------------------------------------------ */
 /* Motion: initial states (only when JS runs and motion is allowed).   */
 /* GSAP animates from these; .no-motion is a safety net.               */
 /* ------------------------------------------------------------------ */
@@ -210,6 +209,18 @@
   .js:not(.no-motion) [data-reveal="rule"] {
     transform: scaleX(0);
     transform-origin: left center;
+  }
+
+  /* SVG measurement lines (paths use pathLength="1") */
+  .js:not(.no-motion) [data-draw] {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+  }
+
+  /* The header joins the hero intro only on pages wrapped by the motion layer */
+  .js:not(.no-motion) [data-motion-root] [data-intro="header"] {
+    opacity: 0;
+    transform: translate3d(0, -12px, 0);
   }
 }
 
@@ -278,6 +289,52 @@
   .disclosure-panel > div {
     overflow: hidden;
     min-height: 0;
+    opacity: 0;
+    transition: opacity 260ms ease;
+  }
+
+  .disclosure-panel > div > * {
+    transform: translateY(-6px);
+    transition: transform 420ms var(--ease-out-strong);
+  }
+
+  .disclosure-panel[data-open="true"] > div {
+    opacity: 1;
+    transition: opacity 420ms ease 60ms;
+  }
+
+  .disclosure-panel[data-open="true"] > div > * {
+    transform: none;
+  }
+
+  /* Plus that becomes a minus: the vertical bar collapses when expanded */
+  .pm-icon {
+    position: relative;
+    display: block;
+    width: 12px;
+    height: 12px;
+  }
+
+  .pm-icon::before,
+  .pm-icon::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 100%;
+    height: 1.5px;
+    margin-top: -0.75px;
+    border-radius: 1px;
+    background: currentColor;
+    transition: transform 320ms var(--ease-out-strong);
+  }
+
+  .pm-icon::after {
+    transform: rotate(90deg);
+  }
+
+  [aria-expanded="true"] .pm-icon::after {
+    transform: rotate(90deg) scaleX(0);
   }
 
   .scrollbar-none {

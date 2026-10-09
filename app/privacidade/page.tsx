@@ -41,21 +41,21 @@ export default function PrivacyPage() {
     <>
       <Header />
       <main id="conteudo" className="container-page pb-28 pt-36 sm:pt-44">
-        <p className="eyebrow text-tinta">Documento institucional</p>
+        <p className="eyebrow text-ardosia">Documento institucional</p>
         <h1 className="display-2 mt-6 max-w-3xl">Política de privacidade</h1>
-        <p className="lead mt-8 max-w-2xl text-tinta">
+        <p className="lead mt-8 max-w-2xl text-ardosia">
           A {site.legalName} trata dados pessoais com o mesmo cuidado que dedica aos tratamentos: apenas o necessário,
           pelo tempo necessário.
         </p>
-        <div className="mt-16 max-w-3xl border-t border-grafite/20">
+        <div className="mt-16 max-w-3xl border-t border-tinta/20">
           {sections.map((s) => (
-            <section key={s.title} className="grid gap-3 border-b border-grafite/15 py-8 sm:grid-cols-[14rem_1fr] sm:gap-10">
+            <section key={s.title} className="grid gap-3 border-b border-tinta/15 py-8 sm:grid-cols-[14rem_1fr] sm:gap-10">
               <h2 className="font-medium">{s.title}</h2>
-              <p className="text-tinta">{s.text}</p>
+              <p className="text-ardosia">{s.text}</p>
             </section>
           ))}
         </div>
-        <p className="eyebrow mt-10 text-tinta">Atualizada em agosto de {site.copyrightYear}</p>
+        <p className="eyebrow mt-10 text-ardosia">Atualizada em agosto de {site.copyrightYear}</p>
       </main>
       <Footer />
     </>

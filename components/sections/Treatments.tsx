@@ -16,7 +16,7 @@ export function Treatments() {
               lines={["Tratamentos com começo,", <>meio e <em className="italic">medida.</em></>]}
             />
           </div>
-          <p className="max-w-md text-tinta lg:col-span-4 lg:col-start-9 lg:pb-2" data-reveal="up">
+          <p className="max-w-md text-ardosia lg:col-span-4 lg:col-start-9 lg:pb-2" data-reveal="up">
             Da prevenção à reabilitação completa. Todo tratamento parte do mesmo método: diagnóstico digital, plano
             claro e execução sem pressa.
           </p>

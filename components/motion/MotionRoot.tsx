@@ -9,12 +9,27 @@ gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 const EASE = "expo.out";
 
+/** Hero entrance, in seconds from page load. Steps overlap so the whole intro settles in ~1.8s. */
+const INTRO: [step: string, at: number][] = [
+  ["header", 0],
+  ["eyebrow", 0.1],
+  ["title", 0.2],
+  ["media", 0.45],
+  ["text", 0.55],
+  ["cta", 0.7],
+  ["proof", 0.85],
+  ["analysis", 1.0],
+];
+
 /**
- * Page-wide motion layer. Server-rendered sections opt in with data attributes:
- *  - data-reveal="up" | "fade" | "lines" | "image" | "rule"  (+ optional data-delay, in seconds)
- *  - data-parallax="0.08"   vertical drift relative to its parent while scrolling (desktop only)
+ * Page-wide motion layer. Markup opts in with data attributes:
+ *  - data-reveal="up" | "fade" | "lines" | "image" | "rule"   scroll-triggered entrance
+ *  - data-draw               SVG line drawn on entrance (needs pathLength="1")
+ *  - data-intro="<step>"     part of the hero intro timeline instead of the scroll reveal
+ *  - data-reveal-zoom="off"  image reveal without the inner settle (frames with overlays)
+ *  - data-parallax="0.08"    vertical drift relative to its parent (desktop only)
  *  - data-count="3000" data-decimals="0"   count-up when visible
- * Initial hidden states live in globals.css and only apply when JS runs and motion is allowed.
+ * Initial states live in globals.css and only apply when JS runs and motion is allowed.
  */
 export function MotionRoot({ children }: { children: ReactNode }) {
   const scope = useRef<HTMLDivElement>(null);
@@ -23,7 +38,24 @@ export function MotionRoot({ children }: { children: ReactNode }) {
     () => {
       document.documentElement.classList.add("js", "motion-ready");
       const q = gsap.utils.selector(scope);
-      const delayOf = (el: Element) => parseFloat((el as HTMLElement).dataset.delay ?? "0");
+      const outsideIntro = (el: Element) => el.closest("[data-intro]") === null;
+
+      /** Clip reveal from the top edge down, with the photo settling inside (unless opted out). */
+      const revealImage = (el: Element, tl?: gsap.core.Timeline, at = 0) => {
+        const clip = [
+          { clipPath: "inset(0% 0% 100% 0%)" },
+          { clipPath: "inset(0% 0% 0% 0%)", duration: 1.4, ease: "expo.inOut" },
+        ] as const;
+        const settle = [{ scale: 1.14 }, { scale: 1, duration: 2, ease: EASE }] as const;
+        const img = (el as HTMLElement).dataset.revealZoom === "off" ? null : el.querySelector("img");
+        if (tl) {
+          tl.fromTo(el, clip[0], clip[1], at);
+          if (img) tl.fromTo(img, settle[0], settle[1], at);
+        } else {
+          gsap.fromTo(el, clip[0], clip[1]);
+          if (img) gsap.fromTo(img, settle[0], settle[1]);
+        }
+      };
 
       const mm = gsap.matchMedia();
       mm.add(
@@ -35,66 +67,74 @@ export function MotionRoot({ children }: { children: ReactNode }) {
           const { motion, desktop } = context.conditions as { motion: boolean; desktop: boolean };
           if (!motion) return; // CSS keeps everything in its final, static state.
 
-          // Text blocks and small groups: fade-up with a gentle stagger.
-          ScrollTrigger.batch(q('[data-reveal="up"], [data-reveal="fade"]'), {
-            start: "top 92%",
+          /* ---------------- Hero intro: one choreographed timeline ---------------- */
+          const intro = gsap.timeline({ delay: 0.1, defaults: { ease: EASE } });
+          for (const [step, at] of INTRO) {
+            q(`[data-intro="${step}"]`).forEach((root) => {
+              if (step === "header") {
+                intro.to(root, { opacity: 1, y: 0, duration: 0.9, clearProps: "transform" }, at);
+                return;
+              }
+              const targets = [root, ...Array.from(root.querySelectorAll("[data-reveal], [data-draw]"))];
+              const hasImage = targets.some((el) => el.getAttribute("data-reveal") === "image");
+              let ups = 0;
+              let draws = 0;
+              for (const el of targets) {
+                const kind = el.getAttribute("data-reveal");
+                if (kind === "image") revealImage(el, intro, at);
+                else if (kind === "lines")
+                  intro.to(el.querySelectorAll(".line > span"), { y: 0, duration: 1.15, stagger: 0.09 }, at);
+                else if (kind === "up") intro.to(el, { opacity: 1, y: 0, duration: 1 }, at + 0.08 * ups++);
+                else if (kind === "fade") intro.to(el, { opacity: 1, duration: 0.9 }, at + (hasImage ? 0.9 : 0));
+                else if (kind === "rule") intro.to(el, { scaleX: 1, duration: 1.3 }, at);
+                else if (el.hasAttribute("data-draw"))
+                  intro.to(el, { strokeDashoffset: 0, duration: 1.1, ease: "power2.inOut" }, at + 0.45 + 0.04 * draws++);
+              }
+            });
+          }
+
+          /* ---------------- Scroll reveal: same vocabulary, triggered near the viewport ---------------- */
+          const start = "top 88%";
+
+          ScrollTrigger.batch(q('[data-reveal="up"], [data-reveal="fade"]').filter(outsideIntro), {
+            start,
             once: true,
             onEnter: (els) =>
-              gsap.to(els, {
-                opacity: 1,
-                y: 0,
-                duration: 1.1,
-                ease: EASE,
-                stagger: 0.08,
-                delay: delayOf(els[0]),
-                overwrite: true,
-              }),
+              gsap.to(els, { opacity: 1, y: 0, duration: 1.05, ease: EASE, stagger: 0.08, overwrite: true }),
           });
 
-          // Headlines: each line slides up out of its mask.
-          q('[data-reveal="lines"]').forEach((el) => {
-            ScrollTrigger.create({
-              trigger: el,
-              start: "top 92%",
-              once: true,
-              onEnter: () =>
-                gsap.to(el.querySelectorAll(".line > span"), {
-                  y: 0,
-                  duration: 1.2,
-                  ease: EASE,
-                  stagger: 0.09,
-                  delay: delayOf(el),
-                }),
+          q('[data-reveal="lines"]')
+            .filter(outsideIntro)
+            .forEach((el) => {
+              ScrollTrigger.create({
+                trigger: el,
+                start,
+                once: true,
+                onEnter: () =>
+                  gsap.to(el.querySelectorAll(".line > span"), { y: 0, duration: 1.15, ease: EASE, stagger: 0.09 }),
+              });
             });
-          });
 
-          // Images: clip reveal from the top edge down, with the photo settling inside.
-          q('[data-reveal="image"]').forEach((el) => {
-            ScrollTrigger.create({
-              trigger: el,
-              start: "top 90%",
-              once: true,
-              onEnter: () => {
-                const delay = delayOf(el);
-                gsap.fromTo(
-                  el,
-                  { clipPath: "inset(0% 0% 100% 0%)" },
-                  { clipPath: "inset(0% 0% 0% 0%)", duration: 1.4, ease: "expo.inOut", delay },
-                );
-                const img = el.querySelector("img");
-                if (img) gsap.fromTo(img, { scale: 1.14 }, { scale: 1, duration: 2, ease: EASE, delay });
-              },
+          q('[data-reveal="image"]')
+            .filter(outsideIntro)
+            .forEach((el) => {
+              ScrollTrigger.create({ trigger: el, start, once: true, onEnter: () => revealImage(el) });
             });
-          });
 
-          // Measuring rules draw from the left.
-          ScrollTrigger.batch(q('[data-reveal="rule"]'), {
-            start: "top 95%",
+          ScrollTrigger.batch(q('[data-reveal="rule"]').filter(outsideIntro), {
+            start,
             once: true,
             onEnter: (els) => gsap.to(els, { scaleX: 1, duration: 1.3, ease: EASE, stagger: 0.06 }),
           });
 
-          // Counters.
+          ScrollTrigger.batch(q("[data-draw]").filter(outsideIntro), {
+            start,
+            once: true,
+            onEnter: (els) =>
+              gsap.to(els, { strokeDashoffset: 0, duration: 1.8, ease: "power2.inOut", stagger: 0.05 }),
+          });
+
+          /* ---------------- Counters ---------------- */
           q("[data-count]").forEach((el) => {
             const end = parseFloat(el.dataset.count ?? "0");
             const decimals = parseInt(el.dataset.decimals ?? "0", 10);
@@ -108,14 +148,14 @@ export function MotionRoot({ children }: { children: ReactNode }) {
               value: end,
               duration: 2,
               ease: "power3.out",
-              scrollTrigger: { trigger: el, start: "top 90%", once: true },
+              scrollTrigger: { trigger: el, start, once: true },
               onUpdate: () => {
                 el.textContent = format.format(state.value);
               },
             });
           });
 
-          // Light parallax, desktop only.
+          /* ---------------- Light parallax, desktop only ---------------- */
           if (desktop) {
             q("[data-parallax]").forEach((el) => {
               const amount = parseFloat(el.dataset.parallax ?? "0.08") * 100;
@@ -142,5 +182,9 @@ export function MotionRoot({ children }: { children: ReactNode }) {
     { scope },
   );
 
-  return <div ref={scope}>{children}</div>;
+  return (
+    <div ref={scope} data-motion-root>
+      {children}
+    </div>
+  );
 }

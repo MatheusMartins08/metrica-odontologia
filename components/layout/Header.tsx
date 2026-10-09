@@ -100,19 +100,22 @@ export function Header() {
   return (
     <>
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-[background-color,border-color] duration-300 ${
-        solid ? "border-b border-grafite/10 bg-linho/85 backdrop-blur-md" : "border-b border-transparent"
+      data-intro="header"
+      className={`fixed inset-x-0 top-0 z-50 border-b transition-[background-color,border-color,box-shadow] duration-400 ease-out-strong ${
+        solid
+          ? "border-tinta/10 bg-porcelana/95 shadow-[0_10px_30px_-24px_rgba(10,42,49,0.45)] backdrop-blur-[6px]"
+          : "border-transparent bg-porcelana/0"
       }`}
     >
       <a
         href="#conteudo"
-        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-3 focus:z-10 focus:bg-musgo focus:px-4 focus:py-2 focus:text-linho"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-3 focus:z-10 focus:bg-petroleo focus:px-4 focus:py-2 focus:text-porcelana"
       >
         Pular para o conteúdo
       </a>
 
       <div
-        className={`container-page flex items-center justify-between gap-6 transition-[height] duration-300 ${
+        className={`container-page flex items-center justify-between gap-6 transition-[height] duration-400 ease-out-strong ${
           solid ? "h-16" : "h-20"
         }`}
       >
@@ -120,7 +123,7 @@ export function Header() {
           <Logo
             variant="wordmark"
             title=""
-            className={`h-auto w-[7.5rem] transition-colors duration-300 sm:w-[8.5rem] ${open ? "text-linho" : "text-grafite"}`}
+            className={`h-auto w-[7.5rem] transition-colors duration-300 sm:w-[8.5rem] ${open ? "text-porcelana" : "text-tinta"}`}
           />
         </SectionLink>
 
@@ -132,7 +135,7 @@ export function Header() {
                   id={item.id}
                   onHome={onHome}
                   aria-current={active === item.id ? "true" : undefined}
-                  className={`link-line transition-colors ${active === item.id ? "text-grafite" : "text-tinta hover:text-grafite"}`}
+                  className={`link-line transition-colors ${active === item.id ? "text-tinta" : "text-ardosia hover:text-tinta"}`}
                 >
                   {item.label}
                 </SectionLink>
@@ -147,7 +150,7 @@ export function Header() {
             target="_blank"
             rel="noopener noreferrer"
             className={`btn hidden min-h-11! py-2.5! pl-5! pr-4! text-[0.88rem] sm:inline-flex ${
-              open ? "bg-linho text-musgo" : "bg-musgo text-linho hover:bg-grafite"
+              open ? "bg-porcelana text-petroleo" : "bg-petroleo text-porcelana hover:bg-abismo"
             }`}
           >
             Agendar avaliação
@@ -159,7 +162,7 @@ export function Header() {
             ref={toggleRef}
             type="button"
             className={`grid size-11 place-items-center rounded-full border transition-colors xl:hidden ${
-              open ? "border-linho/30 text-linho" : "border-grafite/20 text-grafite"
+              open ? "border-porcelana/30 text-porcelana" : "border-tinta/20 text-tinta"
             }`}
             aria-expanded={open}
             aria-controls="menu-mobile"
@@ -191,7 +194,7 @@ export function Header() {
         aria-modal="true"
         aria-label="Menu"
         inert={!open}
-        className={`on-dark fixed inset-0 z-40 flex flex-col bg-musgo text-linho transition-[opacity,visibility] duration-400 xl:hidden ${
+        className={`on-dark fixed inset-0 z-40 flex flex-col bg-petroleo text-porcelana transition-[opacity,visibility] duration-400 xl:hidden ${
           open ? "visible opacity-100" : "invisible opacity-0"
         }`}
       >
@@ -199,7 +202,7 @@ export function Header() {
           <nav aria-label="Menu móvel">
             <ul className="flex flex-col">
               {nav.map((item, i) => (
-                <li key={item.id} className="overflow-hidden border-b border-linho/10">
+                <li key={item.id} className="overflow-hidden border-b border-porcelana/10">
                   <SectionLink
                     id={item.id}
                     onHome={onHome}
@@ -211,7 +214,7 @@ export function Header() {
                     }}
                   >
                     <span className="font-serif text-[2.35rem] leading-none tracking-tight sm:text-5xl">{item.label}</span>
-                    <span className="eyebrow text-salvia" aria-hidden="true">
+                    <span className="eyebrow text-bruma" aria-hidden="true">
                       0{i + 1}
                     </span>
                   </SectionLink>
@@ -225,13 +228,13 @@ export function Header() {
               href={whatsappLink()}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn w-full bg-linho text-musgo sm:w-auto"
+              className="btn w-full bg-porcelana text-petroleo sm:w-auto"
               onClick={() => close(false)}
             >
               Agendar avaliação pelo WhatsApp
               <Icon name="arrowUpRight" size={18} className="btn-arrow" />
             </a>
-            <div className="flex flex-wrap gap-x-8 gap-y-2 text-[0.95rem] text-salvia">
+            <div className="flex flex-wrap gap-x-8 gap-y-2 text-[0.95rem] text-bruma">
               <a href={site.phone.href} className="link-line">
                 {site.phone.display}
               </a>

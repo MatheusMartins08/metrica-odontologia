@@ -30,12 +30,12 @@ export function Differentials() {
 
         <ol className="grid gap-x-10 sm:grid-cols-2 lg:col-span-6 lg:col-start-7 lg:pt-24">
           {differentials.items.map((item, i) => (
-            <li key={item.title} className="border-t border-grafite/15 py-8" data-reveal="up">
-              <p className="eyebrow text-tinta" aria-hidden="true">
+            <li key={item.title} className="border-t border-tinta/15 py-8" data-reveal="up">
+              <p className="eyebrow text-ardosia" aria-hidden="true">
                 {String(i + 1).padStart(2, "0")}
               </p>
               <h3 className="mt-4 font-serif text-[1.75rem] leading-tight tracking-[-0.01em]">{item.title}</h3>
-              <p className="mt-3 text-tinta">{item.text}</p>
+              <p className="mt-3 text-ardosia">{item.text}</p>
             </li>
           ))}
         </ol>

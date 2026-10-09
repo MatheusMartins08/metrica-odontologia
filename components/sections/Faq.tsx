@@ -17,7 +17,7 @@ export function Faq() {
   };
 
   return (
-    <section id="faq" aria-labelledby="faq-title" className="section-y bg-creme">
+    <section id="faq" aria-labelledby="faq-title" className="section-y bg-areia">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }}
@@ -31,14 +31,14 @@ export function Faq() {
               className="display-2 mt-8"
               lines={["Perguntas", <em key="e" className="italic">frequentes</em>]}
             />
-            <p className="mt-8 max-w-xs text-tinta" data-reveal="up">
+            <p className="mt-8 max-w-xs text-ardosia" data-reveal="up">
               Não encontrou o que procurava? A recepção responde pelo WhatsApp em poucos minutos.
             </p>
             <a
               href={whatsappLink("Olá! Tenho uma dúvida sobre os tratamentos da Métrica.")}
               target="_blank"
               rel="noopener noreferrer"
-              className="link-line mt-5 inline-flex items-center gap-2 text-[0.95rem] font-medium text-musgo"
+              className="link-line mt-5 inline-flex items-center gap-2 text-[0.95rem] font-medium text-petroleo"
               data-reveal="up"
             >
               Enviar uma pergunta

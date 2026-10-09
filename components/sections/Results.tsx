@@ -16,7 +16,7 @@ export function Results() {
               lines={["Resultados que", <em key="e" className="italic">parecem naturais.</em>]}
             />
           </div>
-          <p className="max-w-sm text-tinta lg:col-span-4 lg:pb-2" data-reveal="up">
+          <p className="max-w-sm text-ardosia lg:col-span-4 lg:pb-2" data-reveal="up">
             Poucos casos, escolhidos com critério. Arraste a linha para comparar o antes e o depois.
           </p>
         </div>

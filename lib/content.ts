@@ -1,14 +1,15 @@
 import type { StaticImageData } from "next/image";
 
-import heroPortrait from "@/public/images/hero/hero-patient-portrait.webp";
+import heroPortrait from "@/public/images/hero/hero-smile-portrait.webp";
+import smileAnalysis from "@/public/images/hero/smile-analysis.webp";
 import clinicReception from "@/public/images/clinic/clinic-reception.webp";
 import clinicLounge from "@/public/images/clinic/clinic-lounge.webp";
 import clinicOperatory from "@/public/images/clinic/clinic-operatory.webp";
 import clinicDetails from "@/public/images/clinic/clinic-details.webp";
 import clinicEntrance from "@/public/images/clinic/clinic-entrance.webp";
-import architectureLight from "@/public/images/clinic/architecture-light.webp";
-import architectureArch from "@/public/images/clinic/architecture-arch.webp";
-import architectureShadow from "@/public/images/clinic/architecture-shadow.webp";
+import consultationPlan from "@/public/images/clinic/consultation-treatment-plan.webp";
+import operatoryChair from "@/public/images/clinic/operatory-chair.webp";
+import operatoryLight from "@/public/images/clinic/operatory-light.webp";
 import consultation3d from "@/public/images/clinic/consultation-3d-planning.webp";
 import consultationModel from "@/public/images/clinic/consultation-dental-model.webp";
 
@@ -29,7 +30,7 @@ import tReabilitacao from "@/public/images/treatments/reabilitacao-oral.webp";
 import tHarmonizacao from "@/public/images/treatments/harmonizacao-do-sorriso.webp";
 
 import techModels from "@/public/images/technology/tech-3d-printed-models.webp";
-import techCad from "@/public/images/technology/tech-cad-design.webp";
+import techPlanning from "@/public/images/technology/tech-digital-planning.webp";
 
 import caseClareamentoAntes from "@/public/images/results/caso-clareamento-antes.webp";
 import caseClareamentoDepois from "@/public/images/results/caso-clareamento-depois.webp";
@@ -53,19 +54,22 @@ export const hero = {
   eyebrow: "Clínica odontológica · Jardins, São Paulo",
   title: ["Cada sorriso", "tem a sua", "medida."],
   subtitle:
-    "Estética e reabilitação oral planejadas digitalmente, com o tempo e a calma que um bom tratamento pede.",
+    "Odontologia estética, implantes e alinhadores planejados digitalmente, com o tempo e a calma que um bom tratamento pede.",
   image: {
     src: heroPortrait,
-    alt: "Mulher sorrindo de forma natural diante de um fundo bege, com dentes claros e harmoniosos",
+    alt: "Paciente sorrindo de forma aberta e natural, com dentes claros e alinhados",
   } satisfies Picture,
-  caption: "Planejamento estético com simulação digital",
+  analysis: {
+    src: smileAnalysis,
+    alt: "Detalhe de um sorriso com linhas de análise digital: linha média, plano incisal, arco do sorriso e limites de cada dente",
+  } satisfies Picture,
   proof: [
     { value: "4,9", label: "nota média no Google", rating: true },
     { value: "1.200+", label: "avaliações de pacientes" },
     { value: "12 anos", label: "de clínica nos Jardins" },
     { value: "5", label: "especialistas na equipe" },
   ],
-  proofNote: "Atendimento particular e convênios selecionados",
+  specialties: ["Implantes", "Lentes de contato dental", "Alinhadores", "Clareamento", "Reabilitação oral"],
 };
 
 /* ------------------------------------------------------------------ */
@@ -76,8 +80,8 @@ export const manifesto = {
   statement:
     "Um sorriso bem tratado não chama atenção para o tratamento. Ele *parece seu* — só que mais saudável, mais leve e em equilíbrio.",
   image: {
-    src: architectureLight,
-    alt: "Luz natural desenhando linhas de sombra sobre uma parede clara",
+    src: consultationPlan,
+    alt: "Dentista apresenta o plano de tratamento em um tablet para a paciente, sentada na cadeira odontológica",
   } satisfies Picture,
   principles: [
     {
@@ -425,7 +429,7 @@ export const differentials = {
 export const technology = {
   images: [
     { src: techModels, alt: "Modelos dentários impressos em 3D sobre superfície escura" },
-    { src: techCad, alt: "Técnico desenha uma prótese em software de modelagem 3D" },
+    { src: techPlanning, alt: "Dentistas analisam o planejamento digital do sorriso, com o modelo 3D dos dentes no monitor" },
   ] satisfies Picture[],
   specs: [
     {
@@ -625,8 +629,8 @@ export const ctaBand = {
   title: "Pronto para uma experiência diferente no dentista?",
   text: "A primeira conversa é sem pressa: entendemos o que você procura e mostramos os caminhos possíveis.",
   image: {
-    src: architectureShadow,
-    alt: "Luz do fim de tarde entrando por janelas e projetando sombras em um corredor",
+    src: operatoryChair,
+    alt: "Cadeira odontológica em consultório claro, vista de frente",
   } satisfies Picture,
 };
 
@@ -634,8 +638,8 @@ export const finalCta = {
   title: ["Comece pela avaliação.", "O resto, planejamos com você."],
   text: "Atendemos de segunda a sábado, nos Jardins. Respondemos pelo WhatsApp em poucos minutos durante o horário comercial.",
   image: {
-    src: architectureArch,
-    alt: "Parede clara com arco e luz natural desenhando faixas de sol",
+    src: operatoryLight,
+    alt: "Refletor e instrumentos de um consultório odontológico iluminado por luz natural",
   } satisfies Picture,
 };
 

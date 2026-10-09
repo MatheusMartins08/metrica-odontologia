@@ -5,19 +5,19 @@ import { ButtonLink } from "@/components/ui/ButtonLink";
 
 export function CtaBand() {
   return (
-    <section aria-labelledby="cta-band-title" className="on-dark relative isolate overflow-hidden bg-noite text-linho">
+    <section aria-labelledby="cta-band-title" className="on-dark relative isolate overflow-hidden bg-abismo text-porcelana">
       <div className="absolute inset-0 -z-10" aria-hidden="true">
         <div className="absolute inset-x-0 top-[-10%] h-[120%]" data-parallax="0.12">
-          <Image src={ctaBand.image.src} alt="" fill sizes="100vw" placeholder="blur" className="object-cover opacity-60" />
+          <Image src={ctaBand.image.src} alt="" fill sizes="100vw" placeholder="blur" className="object-cover opacity-45 mix-blend-luminosity" />
         </div>
-        <div className="absolute inset-0 bg-linear-to-r from-noite via-noite/75 to-noite/20" />
+        <div className="absolute inset-0 bg-linear-to-r from-abismo via-abismo/80 to-abismo/25" />
       </div>
 
       <div className="container-page flex min-h-[34rem] flex-col justify-center py-24 sm:min-h-[38rem]">
         <h2 id="cta-band-title" className="display-2 max-w-3xl" data-reveal="up">
           {ctaBand.title}
         </h2>
-        <p className="lead mt-6 max-w-lg text-salvia" data-reveal="up">
+        <p className="lead mt-6 max-w-lg text-bruma" data-reveal="up">
           {ctaBand.text}
         </p>
         <div className="mt-10" data-reveal="up">

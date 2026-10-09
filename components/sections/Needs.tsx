@@ -5,7 +5,7 @@ import { NeedsSelector } from "@/components/interactive/NeedsSelector";
 
 export function Needs() {
   return (
-    <section aria-labelledby="ajuda-title" className="on-dark section-y bg-musgo text-linho">
+    <section aria-labelledby="ajuda-title" className="on-dark section-y bg-petroleo text-porcelana">
       <div className="container-page">
         <div className="mb-14 grid gap-8 lg:mb-20 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-7">
@@ -16,7 +16,7 @@ export function Needs() {
               lines={["Como podemos", <>te <em className="italic">ajudar?</em></>]}
             />
           </div>
-          <p className="max-w-sm text-salvia lg:col-span-4 lg:col-start-9 lg:pb-2" data-reveal="up">
+          <p className="max-w-sm text-bruma lg:col-span-4 lg:col-start-9 lg:pb-2" data-reveal="up">
             Escolha o que mais se parece com o seu momento. A gente indica por onde começar.
           </p>
         </div>

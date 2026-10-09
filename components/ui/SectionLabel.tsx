@@ -7,7 +7,7 @@ interface SectionLabelProps {
 
 /** Mono "measurement" label that opens each section: index, label and a ticked rule. */
 export function SectionLabel({ index, label, tone = "light", className = "" }: SectionLabelProps) {
-  const color = tone === "dark" ? "text-salvia" : "text-tinta";
+  const color = tone === "dark" ? "text-bruma" : "text-ardosia";
 
   return (
     <div className={`flex items-end gap-4 ${color} ${className}`} data-reveal="fade">
