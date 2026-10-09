@@ -229,20 +229,27 @@ export function Header() {
           <nav aria-label="Menu móvel">
             <ul className="flex flex-col">
               {nav.map((item, i) => (
-                <li key={item.id} className="overflow-hidden border-b border-porcelana/10">
+                <li key={item.id} className="border-b border-porcelana/10">
+                  {/* The link itself stays untransformed so its whole box is a reliable tap target;
+                      only the inner row slides up inside it. A transformed, clipped link inside the
+                      drawer's scroller didn't receive taps in Chrome on Android. */}
                   <SectionLink
                     id={item.id}
                     onHome={onHome}
                     onClick={(e) => goToSection(e, item.id)}
-                    className="flex items-baseline justify-between py-3.5 transition-transform duration-500 ease-out-strong"
-                    style={{
-                      transform: open ? "translateY(0)" : "translateY(110%)",
-                      transitionDelay: open ? `${80 + i * 45}ms` : "0ms",
-                    }}
+                    className="block overflow-hidden"
                   >
-                    <span className="font-serif text-[2.35rem] leading-none tracking-tight sm:text-5xl">{item.label}</span>
-                    <span className="eyebrow text-bruma" aria-hidden="true">
-                      0{i + 1}
+                    <span
+                      className="flex items-baseline justify-between py-3.5 transition-transform duration-500 ease-out-strong"
+                      style={{
+                        transform: open ? "none" : "translateY(110%)",
+                        transitionDelay: open ? `${80 + i * 45}ms` : "0ms",
+                      }}
+                    >
+                      <span className="font-serif text-[2.35rem] leading-none tracking-tight sm:text-5xl">{item.label}</span>
+                      <span className="eyebrow text-bruma" aria-hidden="true">
+                        0{i + 1}
+                      </span>
                     </span>
                   </SectionLink>
                 </li>
