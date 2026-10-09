@@ -103,7 +103,7 @@ export function Header() {
       data-intro="header"
       className={`fixed inset-x-0 top-0 z-50 border-b transition-[background-color,border-color,box-shadow,backdrop-filter] duration-400 ease-out-strong ${
         solid
-          ? "border-tinta/12 bg-porcelana/97 shadow-[0_10px_30px_-24px_rgba(10,42,49,0.45)] backdrop-blur-sm"
+          ? "border-tinta/12 bg-porcelana/88 shadow-[0_10px_30px_-24px_rgba(10,42,49,0.45)] backdrop-blur-md"
           : "border-transparent bg-porcelana/0"
       }`}
     >

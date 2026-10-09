@@ -72,7 +72,8 @@ export function MotionRoot({ children }: { children: ReactNode }) {
           for (const [step, at] of INTRO) {
             q(`[data-intro="${step}"]`).forEach((root) => {
               if (step === "header") {
-                intro.to(root, { opacity: 1, y: 0, duration: 0.9, clearProps: "transform" }, at);
+                // Keep the final inline transform: clearing it would re-expose the -12px initial state from globals.css.
+                intro.to(root, { opacity: 1, y: 0, duration: 0.9 }, at);
                 return;
               }
               const targets = [root, ...Array.from(root.querySelectorAll("[data-reveal], [data-draw]"))];

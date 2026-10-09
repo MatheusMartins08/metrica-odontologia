@@ -52,7 +52,7 @@ export function TreatmentIndex({ items }: { items: Treatment[] }) {
         className="pointer-events-none absolute left-0 top-0 z-10 hidden [@media(hover:hover)_and_(pointer:fine)]:lg:block"
       >
         <div
-          className={`relative -ml-[7.5rem] -mt-[9.5rem] aspect-4/5 w-60 overflow-hidden transition-[opacity,transform] duration-300 ease-out-strong ${
+          className={`relative isolate -ml-20 -mt-25 aspect-4/5 w-40 overflow-hidden rounded-2xl transition-[opacity,transform] duration-300 ease-out-strong ${
             showPreview ? "scale-100 opacity-100" : "scale-95 opacity-0"
           }`}
         >
@@ -62,7 +62,7 @@ export function TreatmentIndex({ items }: { items: Treatment[] }) {
               src={t.image.src}
               alt=""
               fill
-              sizes="240px"
+              sizes="160px"
               className={`object-cover transition-opacity duration-300 ${hovered === i ? "opacity-100" : "opacity-0"}`}
             />
           ))}
