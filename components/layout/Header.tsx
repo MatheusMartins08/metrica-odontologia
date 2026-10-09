@@ -101,9 +101,9 @@ export function Header() {
     <>
     <header
       data-intro="header"
-      className={`fixed inset-x-0 top-0 z-50 border-b transition-[background-color,border-color,box-shadow] duration-400 ease-out-strong ${
+      className={`fixed inset-x-0 top-0 z-50 border-b transition-[background-color,border-color,box-shadow,backdrop-filter] duration-400 ease-out-strong ${
         solid
-          ? "border-tinta/10 bg-porcelana/95 shadow-[0_10px_30px_-24px_rgba(10,42,49,0.45)] backdrop-blur-[6px]"
+          ? "border-tinta/12 bg-porcelana/97 shadow-[0_10px_30px_-24px_rgba(10,42,49,0.45)] backdrop-blur-sm"
           : "border-transparent bg-porcelana/0"
       }`}
     >
@@ -116,7 +116,7 @@ export function Header() {
 
       <div
         className={`container-page flex items-center justify-between gap-6 transition-[height] duration-400 ease-out-strong ${
-          solid ? "h-16" : "h-20"
+          solid ? "h-18 xl:h-19" : "h-20"
         }`}
       >
         <SectionLink id="inicio" onHome={onHome} className="relative z-10 -my-2 py-2" aria-label="Métrica Odontologia Contemporânea — início">

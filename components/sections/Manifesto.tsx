@@ -16,6 +16,7 @@ export function Manifesto() {
                 alt={manifesto.image.alt}
                 fill
                 placeholder="blur"
+                quality={85}
                 sizes="(min-width: 1024px) 24rem, 0px"
                 className="object-cover"
               />

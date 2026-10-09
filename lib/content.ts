@@ -7,7 +7,7 @@ import clinicLounge from "@/public/images/clinic/clinic-lounge.webp";
 import clinicOperatory from "@/public/images/clinic/clinic-operatory.webp";
 import clinicDetails from "@/public/images/clinic/clinic-details.webp";
 import clinicEntrance from "@/public/images/clinic/clinic-entrance.webp";
-import consultationPlan from "@/public/images/clinic/consultation-treatment-plan.webp";
+import consultationConversation from "@/public/images/clinic/consultation-dentist-conversation.webp";
 import operatoryChair from "@/public/images/clinic/operatory-chair.webp";
 import operatoryLight from "@/public/images/clinic/operatory-light.webp";
 import consultation3d from "@/public/images/clinic/consultation-3d-planning.webp";
@@ -80,8 +80,8 @@ export const manifesto = {
   statement:
     "Um sorriso bem tratado não chama atenção para o tratamento. Ele *parece seu* — só que mais saudável, mais leve e em equilíbrio.",
   image: {
-    src: consultationPlan,
-    alt: "Dentista apresenta o plano de tratamento em um tablet para a paciente, sentada na cadeira odontológica",
+    src: consultationConversation,
+    alt: "Dentista sentada ao lado da paciente explica o tratamento com um modelo dentário, em consultório iluminado por luz natural",
   } satisfies Picture,
   principles: [
     {
