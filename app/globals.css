@@ -55,6 +55,16 @@
     text-rendering: optimizeLegibility;
   }
 
+  /* Laptops and desktops with a mouse get a denser scale: 80% up to ~1600px, 90% at 1920px,
+     100% from ~2240px. Touch devices and narrow windows keep 100%. Everything is sized in
+     rem/vw, so the layout reflows for real (no zoom or transform), and % keeps the user's
+     browser font-size preference. */
+  @media (min-width: 64rem) and (hover: hover) and (pointer: fine) {
+    html {
+      font-size: clamp(80%, 30% + 0.5vw, 100%);
+    }
+  }
+
   @media (prefers-reduced-motion: no-preference) {
     html {
       scroll-behavior: smooth;
@@ -141,7 +151,8 @@
 
 @utility eyebrow {
   font-family: var(--font-mono);
-  font-size: 0.72rem;
+  /* floor keeps the small caps legible when the root scale drops on laptops */
+  font-size: max(0.72rem, 10px);
   line-height: 1.4;
   letter-spacing: 0.16em;
   text-transform: uppercase;

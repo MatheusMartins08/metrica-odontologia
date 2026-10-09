@@ -49,12 +49,15 @@ interface IconProps extends Omit<SVGProps<SVGSVGElement>, "name"> {
   filled?: boolean;
 }
 
-export function Icon({ name, size = 20, filled = false, className, ...rest }: IconProps) {
+export function Icon({ name, size = 20, filled = false, className, style, ...rest }: IconProps) {
+  // `size` is in px at the base scale; rem keeps icons in step with text when the root scale changes.
+  const length = `${size / 16}rem`;
   return (
     <svg
       viewBox="0 0 24 24"
       width={size}
       height={size}
+      style={{ width: length, height: length, ...style }}
       fill={filled ? "currentColor" : "none"}
       stroke={filled ? "none" : "currentColor"}
       strokeWidth={1.25}

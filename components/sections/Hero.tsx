@@ -70,7 +70,7 @@ export function Hero() {
               <SmileAnalysis
                 intro
                 image={hero.analysis}
-                className="relative -mt-20 ml-auto mr-3 w-[66%] outline-[6px] outline-porcelana outline-solid sm:w-[52%] lg:absolute lg:-bottom-12 lg:-left-14 lg:m-0 lg:w-[58%]"
+                className="relative -mt-20 ml-auto mr-3 w-[66%] outline-[0.375rem] outline-porcelana outline-solid sm:w-[52%] lg:absolute lg:-bottom-12 lg:-left-14 lg:m-0 lg:w-[58%]"
               />
             </div>
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState, type MouseEvent } from "react";
 import { usePathname } from "next/navigation";
 import { Logo } from "@/components/brand/Logo";
 import { Icon } from "@/components/ui/Icon";
@@ -47,6 +47,20 @@ export function Header() {
     if (restoreFocus) toggleRef.current?.focus();
   }, []);
 
+  // Section picked in the drawer, scrolled to once the drawer has closed and released the scroll lock.
+  const pendingSection = useRef<string | null>(null);
+
+  const goToSection = (e: MouseEvent<HTMLAnchorElement>, id: string) => {
+    // Off the landing page the link routes home with the hash; only the drawer needs closing.
+    if (onHome) {
+      // The native jump would run while the drawer is still inert and locking scroll, which some
+      // mobile browsers drop; scroll ourselves after the drawer has closed instead.
+      e.preventDefault();
+      pendingSection.current = id;
+    }
+    close(false);
+  };
+
   // Mobile menu: scroll lock, Escape, focus trap.
   useEffect(() => {
     if (!open) return;
@@ -86,6 +100,19 @@ export function Header() {
       document.removeEventListener("keydown", onKey);
     };
   }, [open, close]);
+
+  // Runs after the scroll-lock cleanup above, so the page can scroll again.
+  useEffect(() => {
+    const id = pendingSection.current;
+    if (open || !id) return;
+    pendingSection.current = null;
+    const target = document.getElementById(id);
+    if (!target) return;
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    // scroll-margin-top on [id] keeps the section clear of the fixed header.
+    target.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+    history.pushState(null, "", `#${id}`);
+  }, [open]);
 
   // Close the drawer if the viewport grows into the desktop layout.
   useEffect(() => {
@@ -206,7 +233,7 @@ export function Header() {
                   <SectionLink
                     id={item.id}
                     onHome={onHome}
-                    onClick={() => close(false)}
+                    onClick={(e) => goToSection(e, item.id)}
                     className="flex items-baseline justify-between py-3.5 transition-transform duration-500 ease-out-strong"
                     style={{
                       transform: open ? "translateY(0)" : "translateY(110%)",
